@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: 'notosans';
+  src: url('../public/assets/font/NotoSansKR-Bold.otf');
+}
+
+@font-face {
+  font-family: 'notosans medium';
+  src: url('../public/assets/font/NotoSansKR-Medium.otf');
+}
+
+@font-face {
+  font-family: 'notosans reg';
+  src: url('../public/assets/font/NotoSansKR-Regular.otf');
+}
+
+@font-face {
+  font-family: 'logo';
+  src: url('../public/assets/font/PaytoneOne-Regular.ttf');
+}
+
+
+@font-face {
+  font-family: 'logo2';
+  src: url('../public/assets/font/Bevan-Regular.ttf');
+}

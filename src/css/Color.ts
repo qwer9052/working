@@ -1,0 +1,17 @@
+export const COLORS = {
+  point: '#3127a0',
+  red: '#FF4E00',
+  yellow: '#FCC92E',
+  green: '#26E995',
+  white: '#FFFFFF',
+  black_000: '#ededed',
+  black_100: '#D5D6DB',
+  black_200: '#BBBDC5',
+  black_300: '#9294A1',
+  black_400: '#6F7283',
+  black_500: '#4F515F',
+  black_600: '#33343C',
+  black_700: '#212121',
+  black_800: '#000000',
+  error: '#FF3E3E',
+};
