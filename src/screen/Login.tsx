@@ -4,6 +4,8 @@ import StyledInput from '../comp/StyledInput';
 import { COLORS } from '../css/Color';
 import StyledLink from '../comp/StyledLink';
 import Checkbox from '../comp/CheckBox';
+import google from '../assets/img/google.png';
+import imgEmail from '../assets/img/img_email.svg';
 
 const Login = () => {
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
@@ -19,7 +21,7 @@ const Login = () => {
           <div style={{ padding: '28px 32px 0' }}>
             <h3>로그인</h3>
             <button onClick={() => alert('가입')} style={{ display: 'flex', borderRadius: 10, border: '1px solid #ebefff', width: '100%' }}>
-              <img style={{ width: 20, height: 20, margin: 'auto 0px auto 15px' }} src={'assets/google.png'} alt='BigCo Inc. logo' />
+              <img style={{ width: 20, height: 20, margin: 'auto 0px auto 15px' }} src={google} alt='BigCo Inc. logo' />
               <div style={{ margin: 'auto', height: 48, display: 'flex', alignItems: 'center' }}>
                 <p style={{ margin: 0 }}>Google 계정으로 로그인</p>
               </div>
@@ -32,7 +34,7 @@ const Login = () => {
               onClick={() => alert('가입')}
               style={{ display: 'flex', borderRadius: 10, border: '1px solid #ebefff', width: '100%', backgroundColor: COLORS.point, color: COLORS.white, marginBottom: 15 }}
             >
-              <img style={{ width: 20, height: 20, margin: 'auto 0px auto 15px' }} src={'assets/img_email.svg'} alt='BigCo Inc. logo' />
+              <img style={{ width: 20, height: 20, margin: 'auto 0px auto 15px' }} src={imgEmail} alt='BigCo Inc. logo' />
               <div style={{ margin: 'auto', height: 48, display: 'flex', alignItems: 'center' }}>
                 <p style={{ margin: 0 }}>이메일로 로그인</p>
               </div>

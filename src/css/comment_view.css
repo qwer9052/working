@@ -1,0 +1,45 @@
+textarea { resize: none;
+font-family: 'notosans reg';
+}
+
+.comment_view_textarea::placeholder {
+    color: #b5b5b5;
+    font-family: 'notosans';
+  }
+.comment_view_btn_cancle{
+    background-color: #fff;
+    border :0;
+    font-family: 'notosans';
+    font-size: 16px;
+    color:#b5b5b5;
+    margin-right: 10px;
+  }
+.comment_view_btn_submit{
+    background-color: #fff;
+    border :0;
+    color:#b5b5b5;
+    font-family: 'notosans';
+    font-size: 16px;
+}
+
+.comment_view_comment_wrap{
+    display: flex;
+
+    flex-direction: column;
+    text-align: left;
+    border-top: 1px solid #eee;
+}
+.comment_view_comment_span{
+    margin-left: 3px;
+    color: #94969b;
+    font-size: 13px;
+
+}
+
+.comment_view_comment_reply_wrap{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background-color: #f8f8f8;
+    border-top: 1px solid #eee;
+}

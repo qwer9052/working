@@ -39,26 +39,41 @@
 
 @font-face {
   font-family: 'notosans';
-  src: url('../public/assets/font/NotoSansKR-Bold.otf');
+  src: url('./assets/font/NotoSansKR-Bold.otf');
 }
 
 @font-face {
   font-family: 'notosans medium';
-  src: url('../public/assets/font/NotoSansKR-Medium.otf');
+  src: url('./assets/font/NotoSansKR-Medium.otf');
 }
 
 @font-face {
   font-family: 'notosans reg';
-  src: url('../public/assets/font/NotoSansKR-Regular.otf');
+  src: url('./assets/font/NotoSansKR-Regular.otf');
 }
 
 @font-face {
   font-family: 'logo';
-  src: url('../public/assets/font/PaytoneOne-Regular.ttf');
+  src: url('./assets/font/PaytoneOne-Regular.ttf');
 }
 
 
 @font-face {
   font-family: 'logo2';
-  src: url('../public/assets/font/Bevan-Regular.ttf');
+  src: url('./assets/font/Bevan-Regular.ttf');
+}
+
+p {
+  font-family: 'notosans reg';
+  margin: 0;
+  padding: 0;
+}
+
+input{
+	outline:none;
+    box-shadow:none;
+}
+textarea{
+  outline:none;
+  box-shadow:none;
 }

@@ -8,6 +8,7 @@ import Login from './screen/Login';
 import Join from './screen/Join';
 import { Provider as ReduxProvider } from 'react-redux';
 import { makeStore } from './store/makeStore';
+import PostDefail from './screen/PostDetail';
 
 const App = () => {
   const store = makeStore();
@@ -29,12 +30,22 @@ const App = () => {
             ></Route>
             <Route path='/login' element={<Login />}></Route>
             <Route path='/join' element={<Join />}></Route>
-            <Route
+            {/* <Route
               path='/product/:productId'
               element={
                 <>
                   <Header />
                   <Product />
+                  <Footer />
+                </>
+              }
+            ></Route> */}
+            <Route
+              path='/post/:postId'
+              element={
+                <>
+                  <Header />
+                  <PostDefail />
                   <Footer />
                 </>
               }

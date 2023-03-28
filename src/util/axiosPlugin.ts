@@ -44,6 +44,12 @@ export const axiosJwtInstance = axios.create({
 axiosJwtInstance.interceptors.request.use(jwtIntercepterReq(), Promise.reject);
 axiosJwtInstance.interceptors.response.use((response) => response, jwtIntercepterRes());
 
+export const axiosPostInstance = axios.create({
+  baseURL: `${postBackServerUrl}/v1`,
+});
+
+axiosPostInstance.interceptors.request.use(intercepterReq(), Promise.reject);
+
 export const axiosJwtPostInstance = axios.create({
   baseURL: `${postBackServerUrl}/v1`,
 });

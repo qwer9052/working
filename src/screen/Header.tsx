@@ -7,11 +7,11 @@ import { COLORS } from '../css/Color';
 
 function Header() {
   return (
-    <header style={{ borderBottom: '1px solid #d4d4d4', position: 'relative' }}>
+    <header style={{ borderBottom: '1px solid #d4d4d4', position: 'relative', marginBottom: 45 }}>
       <div style={{ height: 80, width: 1100, margin: 'auto', justifyContent: 'space-between', display: 'flex' }}>
         <div style={{ alignSelf: 'center' }}>
           <Link style={{ textDecoration: 'none' }} to='/'>
-            <p style={{ fontSize: 32, fontWeight: 'bold', color: COLORS.point, fontFamily: 'notosans' }}>Workingnet</p>
+            <p style={{ fontSize: 32, fontWeight: 'bold', color: COLORS.point, fontFamily: 'logo' }}>Workingnet</p>
           </Link>
         </div>
 
