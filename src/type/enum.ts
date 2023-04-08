@@ -16,3 +16,9 @@ export const POST_TYPE_PRIORITY_NAME_MAP = {
   [postType.COMPANY]: '회사',
   [postType.FOOT]: '음식',
 };
+
+export enum step {
+  first,
+  second,
+  thrid,
+}

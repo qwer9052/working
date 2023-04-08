@@ -1,19 +1,27 @@
 import { combineReducers } from 'redux';
 import { Loading } from '../type/loading';
-import { LoadingActions, ReduxAction } from '../type/reduxAction';
+import { Term } from '../type/term';
+import { LoadingActions, ReduxAction, SignupActions } from '../type/reduxAction';
+import { Signup } from '../type/signup';
 
 const loadingState: Loading = {
   loading: false,
 };
 
-// export const baseReducer = (state: AppState = initialState, action: UserActions) => {
-//   switch (action.type) {
-//     case 'signUpProc':
-//       return { ...state, signUpInfo: action.signUpInfo };
-//     default:
-//       return state;
-//   }
-// };
+const signupState: Signup = {
+  email: '',
+  name: '',
+  pwd: '',
+};
+
+export const signupReducer = (state: Signup = signupState, action: SignupActions) => {
+  switch (action.type) {
+    case ReduxAction.signup:
+      return { ...action };
+    default:
+      return state;
+  }
+};
 
 //로딩화면
 export const loadingReducer = (state: Loading = loadingState, action: LoadingActions) => {
@@ -25,4 +33,4 @@ export const loadingReducer = (state: Loading = loadingState, action: LoadingAct
   }
 };
 
-export const rootReducer = combineReducers({ loadingReducer });
+export const rootReducer = combineReducers({ loadingReducer, signupReducer });

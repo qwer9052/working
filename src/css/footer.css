@@ -1,0 +1,55 @@
+
+
+footer .info a {
+    height: 35px;
+}
+
+
+footer .info a {
+    position: relative;
+    width: 50%;
+    height: 28px;
+    padding: 0;
+    color: #94969b;
+    font-size: 14px;
+    line-height: 28px;
+}
+
+@media screen and (min-width: 1100px){
+    footer .info a {
+        width: auto;
+        padding: 0 10px 0 11px;
+    }
+
+    footer .info a:before {
+        position: absolute;
+        top: calc(50% - 5px);
+        left: 0;
+        width: 1px;
+        height: 10px;
+        background: #d4d4d4;
+        content: '';
+    }
+    footer .info {
+        padding: 0 20px;
+    }
+    footer .info .copy {
+        margin-top: 6px;
+        font-size: 14px;
+    }
+}
+
+footer .info .copy {
+    margin-top: 16px;
+    color: #bbc0c5;
+    font-size: 12px;
+}
+
+footer{
+    padding:20px 0px;
+    margin-top: 60px;
+    border-top: 1px solid #d4d4d4;
+    text-align: left;
+    position: relative;
+}
+

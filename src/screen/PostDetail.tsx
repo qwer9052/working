@@ -41,18 +41,28 @@ const PostDefail = () => {
           <div>
             <h2 style={{ textAlign: 'left' }}>{post?.title}</h2>
           </div>
+
+          <div style={{ color: COLORS.point, fontSize: 13, fontFamily: 'notosans reg', textAlign: 'left', marginBottom: 15 }}>
+            <b>{post?.tbUser.name}</b>
+          </div>
+
           <div style={{ display: 'flex' }}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Time />
-              <span style={{ color: COLORS.black_350, fontSize: 14 }}>17시간</span>
+              <b style={{ color: COLORS.black_350, fontSize: 14, marginLeft: 5 }}>17시간</b>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
               <Eye />
-              <span style={{ color: COLORS.black_350, fontSize: 14 }}>13</span>
+              <b style={{ color: COLORS.black_350, fontSize: 14, marginLeft: 5 }}>13</b>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
               <MessageGray />
-              <span style={{ color: COLORS.black_350, fontSize: 14 }}>6346536</span>
+              <b style={{ color: COLORS.black_350, fontSize: 14, marginLeft: 5 }}>{post?.comments.length}</b>
+            </div>
+            <div style={{ display: 'flex', marginRight: 0, marginLeft: 'auto' }}>
+              <BookMark />
+              <div style={{ width: 10 }} />
+              <More />
             </div>
           </div>
           <div style={divid} />

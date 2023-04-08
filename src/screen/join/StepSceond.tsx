@@ -3,11 +3,25 @@ import { CheckboxLeft } from '../../comp/CheckBox';
 import StyledCheckBox from '../../comp/StyledCheckBox';
 import Term1 from '../../comp/term/Term1';
 import { COLORS } from '../../css/Color';
+import { step } from '../../type/enum';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { signupAction } from '../../store/actions';
+import { axiosInstance } from '../../util/axiosPlugin';
+import { Token } from '../../type/token';
+import { writeToStorage } from '../../util/asyncStorage';
 
-const StepSceond = () => {
+type Step = {
+  signupStep: step;
+  setSignupStep: Function;
+};
+
+const StepSceond = (props: Step) => {
   const [next, setNext] = useState(false);
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [checkList, setCheckList] = useState<string[]>([]);
+  const signupReducer = useSelector((state: any) => state.signupReducer);
 
   const checkAll = (e: ChangeEvent<HTMLInputElement>) => {
     e.target.checked ? setCheckList(['terms', 'collect', 'another', 'entrust', 'marketing']) : setCheckList([]);
@@ -23,7 +37,29 @@ const StepSceond = () => {
     } else {
       setNext(false);
     }
-  }, [checkList]);
+  }, [checkList, signupReducer]);
+
+  const submit = () => {
+    axiosInstance
+      .post('/user', {
+        email: signupReducer.email,
+        pwd: signupReducer.pwd,
+        name: signupReducer.name,
+      })
+      .then((res) => {
+        const { accessToken, refreshToken } = res.data;
+        const token: Token = {
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+        };
+        writeToStorage('token', JSON.stringify(token));
+        navigate('/');
+      })
+      .catch((err) => {
+        alert('오류');
+        console.log(err);
+      });
+  };
 
   return (
     <div style={{ width: 600, backgroundColor: '#fff', padding: '10px 43px 39px' }}>
@@ -95,8 +131,8 @@ const StepSceond = () => {
 
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center' }}>
           <button
-            onChange={() => alert('#4')}
-            disabled={next}
+            onClick={submit}
+            disabled={!next}
             style={{ width: 250, height: 44, border: 0, backgroundColor: next ? COLORS.point : COLORS.black_200, color: COLORS.white, fontWeight: 'bold', borderRadius: 7 }}
           >
             회원가입 완료

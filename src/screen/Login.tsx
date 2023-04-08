@@ -6,10 +6,42 @@ import StyledLink from '../comp/StyledLink';
 import Checkbox from '../comp/CheckBox';
 import google from '../assets/img/google.png';
 import imgEmail from '../assets/img/img_email.svg';
+import { axiosInstance } from '../util/axiosPlugin';
+import { Token } from '../type/token';
+import { writeToStorage } from '../util/asyncStorage';
+import { useNavigate } from 'react-router-dom';
+import { handleOnChange } from '../util/common';
 
 const Login = () => {
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
   const [autoLogin, setAutoLogin] = useState(false);
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState<any>({ email: null, pwd: null });
+  const [inputs, setInputs] = useState({ email: '', pwd: '' });
+
+  const submit = () => {
+    console.log(inputs);
+    axiosInstance
+      .post('/user/login', {
+        email: inputs.email,
+        pwd: inputs.pwd,
+      })
+      .then((res) => {
+        console.log(res.data);
+        const { accessToken, refreshToken } = res.data;
+        const token: Token = {
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+        };
+        writeToStorage('token', JSON.stringify(token));
+        alert('로그인 성공');
+        navigate('/');
+      })
+      .catch((err) => {
+        alert('오류');
+        console.log(err);
+      });
+  };
 
   return (
     <div style={{ width: windowSize.current[0], height: windowSize.current[1], display: 'flex', justifyContent: 'center', backgroundColor: '#ebecee' }}>
@@ -27,13 +59,25 @@ const Login = () => {
               </div>
             </button>
             <div style={{ height: 1, background: '#E5E6E9', marginTop: 20, marginBottom: 20 }} />
-            <StyledInput placeholder='이메일 주소' style={{ marginBottom: 10 }} />
-            <StyledInput placeholder='비밀번호 (8자리 이상)' style={{ marginBottom: 10 }}></StyledInput>
 
-            <button
-              onClick={() => alert('가입')}
-              style={{ display: 'flex', borderRadius: 10, border: '1px solid #ebefff', width: '100%', backgroundColor: COLORS.point, color: COLORS.white, marginBottom: 15 }}
-            >
+            <StyledInput
+              onChange={(e: any) => {
+                handleOnChange(e.target.value, 'email', setInputs);
+              }}
+              type='email'
+              placeholder='이메일 주소'
+              style={{ marginBottom: 10 }}
+            />
+            <StyledInput
+              onChange={(e: any) => {
+                handleOnChange(e.target.value, 'pwd', setInputs);
+              }}
+              type='password'
+              placeholder='비밀번호 (8자리 이상)'
+              style={{ marginBottom: 10 }}
+            ></StyledInput>
+
+            <button onClick={submit} style={{ display: 'flex', borderRadius: 10, border: '1px solid #ebefff', width: '100%', backgroundColor: COLORS.point, color: COLORS.white, marginBottom: 15 }}>
               <img style={{ width: 20, height: 20, margin: 'auto 0px auto 15px' }} src={imgEmail} alt='BigCo Inc. logo' />
               <div style={{ margin: 'auto', height: 48, display: 'flex', alignItems: 'center' }}>
                 <p style={{ margin: 0 }}>이메일로 로그인</p>

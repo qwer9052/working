@@ -18,7 +18,7 @@ const Main = () => {
   const post = () => {
     console.log('post');
     axiosPostInstance
-      .get(`post?page=0&size=10&search=${''}`)
+      .get(`/post?page=0&size=10&search=${''}`)
       .then((res) => {
         setList(res.data);
       })

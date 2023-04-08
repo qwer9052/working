@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Token } from '../type/token';
 import { readFromStorage, writeToStorage } from './asyncStorage';
 
-export let serverUrl = 'http://192.168.0.9';
+export let serverUrl = 'http://localhost';
 
 export let postServerPort = ':8100';
 export let userServerPort = ':8080';
