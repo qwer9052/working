@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { COLORS } from '../css/Color';
 import '../css/comment_view.css';
 import { Comment, CommentChildren } from '../type/post';
 import { User } from '../type/user';
+import { date } from '../util/common';
 import CommentReplyView from './CommentReplyView';
+import CommentWriteView from './CommentWriteView';
 import Eye from './img/Eye';
 import LikeBlack from './img/LikeBlack';
 import LikeGray from './img/LikeGray';
@@ -24,6 +27,7 @@ const writer = (writerId, commentUserId) => {
 };
 
 const CommentView = (props: CommentViewType) => {
+  const [hide, setHide] = useState(true);
   return (
     <div className='comment_view_comment_wrap'>
       <div style={{ padding: '20px 30px' }}>
@@ -36,21 +40,23 @@ const CommentView = (props: CommentViewType) => {
         <div style={{ display: 'flex' }}>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Time />
-            <span className='comment_view_comment_span'>17시간</span>
+            <span className='comment_view_comment_span'>{date(props?.comment?.creDt)}</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
             <LikeGray />
-            <span className='comment_view_comment_span'>13</span>
+            <span className='comment_view_comment_span'>{props.comment.countCommentLike}</span>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
+          <div onClick={() => setHide((e) => !e)} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13, cursor: 'pointer' }}>
             <MessageGray />
-            <span className='comment_view_comment_span'>6346536</span>
+            <span className='comment_view_comment_span'>{props?.comment?.children.length}</span>
           </div>
           <div style={{ marginLeft: 'auto', marginRight: 0 }}>
             <More />
           </div>
         </div>
       </div>
+      {!hide ? <CommentWriteView key={props.comment.commentId + '_'} hide={true} length={0} postId={props?.comment?.parentId} commentId={props.comment.commentId} /> : null}
+
       {props?.comment?.children.map((item: CommentChildren) => {
         return <CommentReplyView writer={props.writer} reply={item} />;
       })}

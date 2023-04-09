@@ -5,10 +5,11 @@ export type Post = {
   postId: number;
   title: string;
   content: string;
-  creDt: string;
+  creDt: Date;
   postType: postType;
   del: del;
   tbUser: User;
+  countPostLike: number;
   comments: Comment[];
 };
 
@@ -18,7 +19,8 @@ export type Comment = {
   del: del;
   content: string;
   parentId: number;
-  creDt: string;
+  countCommentLike: number;
+  creDt: Date;
   children: CommentChildren[];
 };
 
@@ -26,7 +28,8 @@ export type CommentChildren = {
   commentId: number;
   tbUser: User;
   del: del;
+  countCommentChildrenLike: number;
   content: string;
   parentId: number;
-  creDt: string;
+  creDt: Date;
 };

@@ -10,6 +10,10 @@ import { COLORS } from '../../css/Color';
 import { step } from '../../type/enum';
 import { signupAction } from '../../store/actions';
 import StyledLink from '../../comp/StyledLink';
+import GoogleSigninButton from '../../comp/GoogleSigninOAuthProvider';
+import { axiosInstance } from '../../util/axiosPlugin';
+import { Token } from '../../type/token';
+import { writeToStorage } from '../../util/asyncStorage';
 type Step = {
   signupStep: step;
   setSignupStep: Function;
@@ -29,19 +33,19 @@ export const StepFirst = (props: Step) => {
     checkInputs();
   }, [errors]);
 
-  const validEmail = (email: string) => {
-    if (!isValidEmail(email)) {
-      handleError('이메일을 확인해 주세요', 'email', setErrors);
-    } else {
-      handleError('', 'email', setErrors);
-    }
-  };
-
   const validName = (name: string) => {
     if (name.length < 3) {
       handleError('닉네임을 입력해 주세요', 'name', setErrors);
     } else {
       handleError('', 'name', setErrors);
+    }
+  };
+
+  const validEmail = (email: string) => {
+    if (!isValidEmail(email)) {
+      handleError('이메일을 확인해 주세요', 'email', setErrors);
+    } else {
+      handleError('', 'email', setErrors);
     }
   };
 
@@ -77,8 +81,29 @@ export const StepFirst = (props: Step) => {
     }, 100);
   };
 
-  const submit = () => {
-    dispatch(signupAction({ email: inputs.email, pwd: inputs.name, name: inputs.name }));
+  const idCheck = async () => {
+    return new Promise((resolve, reject) => {
+      axiosInstance
+        .post('/user/id/check', {
+          email: inputs.email,
+        })
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => {
+          reject(false);
+        });
+    });
+  };
+
+  const submit = async () => {
+    const bol = await idCheck();
+    console.log(bol);
+    if (!bol) {
+      handleError('중복되는 이메일 입니다.', 'email', setErrors);
+      return;
+    }
+    dispatch(signupAction({ email: inputs.email, pwd: inputs.pwd, name: inputs.name }));
     props.setSignupStep(step.second);
 
     // axiosInstance
@@ -107,18 +132,20 @@ export const StepFirst = (props: Step) => {
     <div style={{ backgroundColor: '#fff', width: 360, border: 0, borderRadius: 12, boxShadow: 'rgb(30 40 58 / 8%) 4px 7px 14px' }}>
       <div style={{ padding: '28px 32px 0' }}>
         <h3>회원가입</h3>
-        <button onClick={() => alert('가입')} style={{ display: 'flex', borderRadius: 10, border: '1px solid #ebefff', width: '100%' }}>
+        <GoogleSigninButton validEmail={validEmail} validName={validName} setInputs={setInputs} />
+        {/* <button onClick={() => alert('가입')} style={{ display: 'flex', borderRadius: 10, border: '1px solid #ebefff', width: '100%' }}>
           <img style={{ width: 20, height: 20, margin: 'auto 0px auto 15px' }} src={google} alt='BigCo Inc. logo' />
           <div style={{ margin: 'auto', height: 48, display: 'flex', alignItems: 'center' }}>
             <p style={{ margin: 0, fontFamily: 'notosans bold', fontSize: 15 }}>Google 계정으로 시작하기</p>
           </div>
-        </button>
+        </button> */}
         <div style={{ height: 1, background: '#E5E6E9', marginTop: 20, marginBottom: 20 }} />
         <StyledInput
           onChange={(e: any) => {
             handleOnChange(e.target.value, 'email', setInputs);
             validEmail(e.target.value);
           }}
+          value={inputs.email}
           maxLength={25}
           placeholder='이메일 주소'
           style={{ marginBottom: 10 }}
@@ -129,6 +156,7 @@ export const StepFirst = (props: Step) => {
             handleOnChange(e.target.value, 'name', setInputs);
             validName(e.target.value);
           }}
+          value={inputs.name}
           maxLength={9}
           placeholder='닉네임'
           style={{ marginBottom: 10 }}

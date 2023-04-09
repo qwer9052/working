@@ -15,6 +15,7 @@ import WrapDiv from '../comp/WrapDiv';
 import { COLORS } from '../css/Color';
 import { Comment, Post } from '../type/post';
 import { axiosPostInstance } from '../util/axiosPlugin';
+import { date } from '../util/common';
 
 const PostDefail = () => {
   const { postId } = useParams();
@@ -27,6 +28,7 @@ const PostDefail = () => {
   const getPost = async () => {
     const result = await axiosPostInstance.get(`post/${postId}`);
     setPost(result.data);
+    console.log(result.data);
   };
 
   return (
@@ -49,7 +51,7 @@ const PostDefail = () => {
           <div style={{ display: 'flex' }}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Time />
-              <b style={{ color: COLORS.black_350, fontSize: 14, marginLeft: 5 }}>17시간</b>
+              <b style={{ color: COLORS.black_350, fontSize: 14, marginLeft: 5 }}>{date(post?.creDt)}</b>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
               <Eye />
@@ -71,7 +73,7 @@ const PostDefail = () => {
             <a onClick={() => alert(34)} style={{ display: 'flex', cursor: 'pointer' }}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <LikeBlack />
-                <span style={{ color: COLORS.black_800, fontSize: 14, marginLeft: 5 }}>좋아요</span>
+                <span style={{ color: COLORS.black_800, fontSize: 14, marginLeft: 5 }}>{post?.countPostLike}</span>
               </div>
             </a>
 
@@ -83,9 +85,9 @@ const PostDefail = () => {
             </div>
           </div>
           <div style={divid} />
-          <CommentWriteView length={post?.comments.length} />
+          <CommentWriteView hide={false} length={post?.comments.length} postId={post?.postId} commentId={0} />
           {post?.comments.map((item: Comment) => {
-            return <CommentView writer={post?.tbUser} comment={item} />;
+            return <CommentView key={item.commentId + '_' + item.parentId} writer={post?.tbUser} comment={item} />;
           })}
         </div>
         <div style={{ flex: 0.27 }}>

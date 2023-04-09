@@ -2,11 +2,14 @@ import { COLORS } from '../css/Color';
 import '../css/comment_view.css';
 import { CommentChildren } from '../type/post';
 import { User } from '../type/user';
+import { date } from '../util/common';
 import Eye from './img/Eye';
 import LikeGray from './img/LikeGray';
 import MessageGray from './img/MessageGray';
 import More from './img/More';
 import Time from './img/Time';
+import moment from 'moment';
+
 type CommentReplyViewType = {
   writer: User;
   reply: CommentChildren;
@@ -33,11 +36,11 @@ const CommentReplyView = (props: CommentReplyViewType) => {
         <div style={{ display: 'flex' }}>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Time />
-            <span className='comment_view_comment_span'>17시간</span>
+            <span className='comment_view_comment_span'>{date(props?.reply?.creDt)}</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
             <LikeGray />
-            <span className='comment_view_comment_span'>13</span>
+            <span className='comment_view_comment_span'>{props?.reply?.countCommentChildrenLike}</span>
           </div>
           <div style={{ marginLeft: 'auto', marginRight: 0 }}>
             <More />
