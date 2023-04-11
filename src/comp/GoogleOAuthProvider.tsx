@@ -37,12 +37,7 @@ const GoogleLoginButton = () => {
         useOneTap
         width='300px'
         onSuccess={(res) => {
-          console.log(res);
           const decoded: any = jwt_decode(res.credential);
-          console.log(decoded);
-          console.log(decoded.email);
-          console.log(decoded.family_name);
-          console.log(decoded.given_name);
           gmailLogin(decoded.email, decoded.sub);
         }}
         onError={() => {

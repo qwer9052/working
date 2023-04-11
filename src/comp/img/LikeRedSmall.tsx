@@ -1,14 +1,14 @@
-const MessageBlack = () => {
+const LikeRedSmall = () => {
   return (
     <div
       style={{
         background: 'url(https://d2u3dcdbebyaiu.cloudfront.net/img/www_kr/sp-kr.png?time=dec2022) no-repeat',
         backgroundSize: '600px 900px',
-        backgroundPosition: '-70px -484px',
-        width: 20,
-        height: 20,
+        backgroundPosition: '-62px -652px',
+        width: '16px',
+        height: '16px',
       }}
     />
   );
 };
-export default MessageBlack;
+export default LikeRedSmall;

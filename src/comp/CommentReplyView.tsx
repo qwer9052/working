@@ -3,6 +3,7 @@ import '../css/comment_view.css';
 import { CommentChildren } from '../type/post';
 import { User } from '../type/user';
 import { date } from '../util/common';
+import CommentLike from './CommentLike';
 import Eye from './img/Eye';
 import LikeGray from './img/LikeGray';
 import MessageGray from './img/MessageGray';
@@ -39,8 +40,13 @@ const CommentReplyView = (props: CommentReplyViewType) => {
             <span className='comment_view_comment_span'>{date(props?.reply?.creDt)}</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
-            <LikeGray />
-            <span className='comment_view_comment_span'>{props?.reply?.countCommentChildrenLike}</span>
+            <CommentLike
+              key={props?.reply?.commentId + '_comment_children_like'}
+              id={props?.reply?.commentId}
+              count={props?.reply?.countCommentChildrenLike}
+              isLike={props?.reply?.like}
+              type={'comment'}
+            />
           </div>
           <div style={{ marginLeft: 'auto', marginRight: 0 }}>
             <More />

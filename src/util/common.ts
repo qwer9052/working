@@ -26,3 +26,13 @@ export const date = (time) => {
     return Math.floor(diff_day) + '일';
   }
 };
+
+export const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  console.log(value);
+  const parts = value.split(`; ${name}=`);
+  console.log(parts);
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift();
+  }
+};

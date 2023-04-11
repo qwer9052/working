@@ -3,10 +3,10 @@ const LikeBlack = () => {
     <div
       style={{
         background: 'url(https://d2u3dcdbebyaiu.cloudfront.net/img/www_kr/sp-kr.png?time=dec2022) no-repeat',
-        backgroundSize: '504px 756px',
-        backgroundPosition: '-109.2px -406.56px',
-        width: 16,
-        height: 16,
+        backgroundSize: '600px 900px',
+        backgroundPosition: '-130px -484px',
+        width: 20,
+        height: 20,
       }}
     />
   );

@@ -5,7 +5,7 @@ import search from '../assets/img/icon_search_black.svg';
 import best from '../assets/img/icon_best.png';
 import '../App.css';
 import { COLORS } from '../css/Color';
-import { axiosPostInstance } from '../util/axiosPlugin';
+import { axiosPostInstance, logout } from '../util/axiosPlugin';
 import { Post } from '../type/post';
 import PostItem from '../comp/PostItem';
 import { PagingModel } from '../type/pagingModel';

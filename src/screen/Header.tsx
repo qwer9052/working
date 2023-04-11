@@ -21,8 +21,7 @@ function Header() {
           </StyledLink>
         </LoginButton>
       );
-    }
-    if (data) {
+    } else if (data) {
       return (
         <LoginButton onClick={() => logout()}>
           <StyledLink style={{ color: '#000' }} to='/login'>
@@ -30,8 +29,15 @@ function Header() {
           </StyledLink>
         </LoginButton>
       );
+    } else {
+      return (
+        <LoginButton>
+          <StyledLink style={{ color: '#000' }} to='/login'>
+            로그인
+          </StyledLink>
+        </LoginButton>
+      );
     }
-    return null;
   };
   return (
     <header style={{ borderBottom: '1px solid #d4d4d4', position: 'relative', marginBottom: 45 }}>

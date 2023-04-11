@@ -17,8 +17,11 @@ const intercepterReq = () => async (config: any) => {
 
 const jwtIntercepterReq = () => async (config: any) => {
   const token = await getToken();
-  config.headers['Content-Type'] = 'application/json;';
-  config.headers['Authorization'] = `Bearer ${token}`;
+  if (token != null) {
+    config.headers['Content-Type'] = 'application/json;';
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
+
   return config;
 };
 const jwtIntercepterRes = () => async (error: any) => {
@@ -46,6 +49,7 @@ axiosJwtInstance.interceptors.response.use((response) => response, jwtIntercepte
 
 export const axiosPostInstance = axios.create({
   baseURL: `${postBackServerUrl}/v1`,
+  withCredentials: true,
 });
 
 axiosPostInstance.interceptors.request.use(intercepterReq(), Promise.reject);
@@ -58,6 +62,7 @@ axiosJwtPostInstance.interceptors.request.use(jwtIntercepterReq(), Promise.rejec
 axiosJwtPostInstance.interceptors.response.use((response) => response, jwtIntercepterRes());
 
 export function logout() {
+  console.log('로그아웃');
   writeToStorage(
     'token',
     JSON.stringify({
@@ -147,7 +152,8 @@ export function getToken() {
             //리프레시 토큰 만료
             //로그아웃
             console.log('리프레시 토큰 만료');
-            logout();
+            resolve(null);
+            //logout();
           } else {
             //엑세스 토큰 만료
             axios

@@ -12,6 +12,8 @@ import LikeGray from './img/LikeGray';
 import MessageGray from './img/MessageGray';
 import More from './img/More';
 import Time from './img/Time';
+import Like from './PostLike';
+import CommentLike from './CommentLike';
 
 type CommentViewType = {
   writer: User;
@@ -28,6 +30,7 @@ const writer = (writerId, commentUserId) => {
 
 const CommentView = (props: CommentViewType) => {
   const [hide, setHide] = useState(true);
+
   return (
     <div className='comment_view_comment_wrap'>
       <div style={{ padding: '20px 30px' }}>
@@ -43,8 +46,7 @@ const CommentView = (props: CommentViewType) => {
             <span className='comment_view_comment_span'>{date(props?.comment?.creDt)}</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
-            <LikeGray />
-            <span className='comment_view_comment_span'>{props.comment.countCommentLike}</span>
+            <CommentLike key={props?.comment?.commentId + '_comment_like'} id={props?.comment?.commentId} count={props?.comment?.countCommentLike} isLike={props?.comment?.like} type={'comment'} />
           </div>
           <div onClick={() => setHide((e) => !e)} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13, cursor: 'pointer' }}>
             <MessageGray />

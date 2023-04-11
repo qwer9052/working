@@ -14,22 +14,52 @@ import SearchRank from '../comp/SearchRank';
 import WrapDiv from '../comp/WrapDiv';
 import { COLORS } from '../css/Color';
 import { Comment, Post } from '../type/post';
-import { axiosPostInstance } from '../util/axiosPlugin';
-import { date } from '../util/common';
+import { axiosJwtPostInstance, axiosPostInstance, logout } from '../util/axiosPlugin';
+import { date, getCookie } from '../util/common';
+import PostLike from '../comp/PostLike';
+import { useQuery } from 'react-query';
 
 const PostDefail = () => {
   const { postId } = useParams();
-  const [post, setPost] = useState<Post>();
+  const [post, setPost] = useState<Post>(null);
 
   useEffect(() => {
-    getPost();
+    test();
   }, []);
 
-  const getPost = async () => {
-    const result = await axiosPostInstance.get(`post/${postId}`);
-    setPost(result.data);
-    console.log(result.data);
+  const test = async () => {
+    const b = await fetchPostHistory();
+    console.log(b);
+    const a = getCookie('postId');
+    console.log(a);
   };
+
+  const fetchPostHistory = () => axiosPostInstance.post(`post/history/${postId}`);
+
+  const getPost = () => axiosJwtPostInstance.get(`post/${postId}`);
+
+  const { isLoading, isError, data, error } = useQuery([`post_${postId}`], getPost, {
+    refetchOnWindowFocus: false, // react-query는 사용자가 사용하는 윈도우가 다른 곳을 갔다가 다시 화면으로 돌아오면 이 함수를 재실행합니다. 그 재실행 여부 옵션 입니다.
+    retry: 0, // 실패시 재호출 몇번 할지
+    onSuccess: (result: any) => {
+      // 성공시 호출
+      setPost(result.data);
+      console.log(result.data);
+    },
+    onError: (e) => {
+      // 실패시 호출 (401, 404 같은 error가 아니라 정말 api 호출이 실패한 경우만 호출됩니다.)
+      // 강제로 에러 발생시키려면 api단에서 throw Error 날립니다. (참조: https://react-query.tanstack.com/guides/query-functions#usage-with-fetch-and-other-clients-that-do-not-throw-by-default)
+      console.log(e);
+    },
+  });
+
+  if (isLoading) {
+    return <>{isLoading}</>;
+  }
+
+  if (isError) {
+    return <>{isError}</>;
+  }
 
   return (
     <WrapDiv>
@@ -70,12 +100,13 @@ const PostDefail = () => {
           <div style={divid} />
           <div style={{ textAlign: 'left' }}>{post?.content}</div>
           <div style={{ display: 'flex', marginTop: 30 }}>
-            <a onClick={() => alert(34)} style={{ display: 'flex', cursor: 'pointer' }}>
+            <PostLike id={post?.postId} count={post?.countPostLike} isLike={post?.like} />
+            {/* <a onClick={() => alert(34)} style={{ display: 'flex', cursor: 'pointer' }}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <LikeBlack />
                 <span style={{ color: COLORS.black_800, fontSize: 14, marginLeft: 5 }}>{post?.countPostLike}</span>
               </div>
-            </a>
+            </a> */}
 
             <div style={{ display: 'flex' }}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
@@ -87,7 +118,7 @@ const PostDefail = () => {
           <div style={divid} />
           <CommentWriteView hide={false} length={post?.comments.length} postId={post?.postId} commentId={0} />
           {post?.comments.map((item: Comment) => {
-            return <CommentView key={item.commentId + '_' + item.parentId} writer={post?.tbUser} comment={item} />;
+            return <CommentView key={item.commentId + '_comment_view_' + item.commentId} writer={post?.tbUser} comment={item} />;
           })}
         </div>
         <div style={{ flex: 0.27 }}>

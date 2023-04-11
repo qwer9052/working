@@ -11,6 +11,7 @@ export type Post = {
   tbUser: User;
   countPostLike: number;
   comments: Comment[];
+  like: boolean;
 };
 
 export type Comment = {
@@ -19,9 +20,10 @@ export type Comment = {
   del: del;
   content: string;
   parentId: number;
-  countCommentLike: number;
   creDt: Date;
   children: CommentChildren[];
+  countCommentLike: number;
+  like: boolean;
 };
 
 export type CommentChildren = {
@@ -29,6 +31,7 @@ export type CommentChildren = {
   tbUser: User;
   del: del;
   countCommentChildrenLike: number;
+  like: boolean;
   content: string;
   parentId: number;
   creDt: Date;
