@@ -12,6 +12,8 @@ export type Post = {
   countPostLike: number;
   comments: Comment[];
   like: boolean;
+  countHistory: number;
+  countComment: number;
 };
 
 export type Comment = {

@@ -13,7 +13,7 @@ const SearchRank = () => {
       <div style={{}}>
         {arr.map((item, index) => {
           return (
-            <div style={{ display: 'flex', alignItems: 'center', padding: '5px 3px' }}>
+            <div key={item + '_' + index} style={{ display: 'flex', alignItems: 'center', padding: '5px 3px' }}>
               <span style={{ textAlign: 'center', flex: 0.05, fontSize: 15, fontFamily: 'notosans', color: COLORS.black_200 }}>{index + 1}</span>
               <span style={{ textAlign: 'left', flex: 0.85, fontSize: 14, fontFamily: 'notosans reg', paddingLeft: 15 }}>{item}</span>
               <span style={{ textAlign: 'left', flex: 0.1 }}>{1}</span>

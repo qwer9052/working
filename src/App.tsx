@@ -6,9 +6,12 @@ import NotFound from './screen/NotFound';
 import Footer from './screen/Footer';
 import Login from './screen/Login';
 import Join from './screen/Join';
-import { Provider as ReduxProvider } from 'react-redux';
+import { Provider as ReduxProvider, useSelector } from 'react-redux';
 import { makeStore } from './store/makeStore';
 import PostDefail from './screen/PostDetail';
+import PostWrite from './screen/PostWrite';
+import Loading from './comp/img/loading';
+import Navigation from './navigation/navigation';
 
 const App = () => {
   const store = makeStore();
@@ -16,44 +19,7 @@ const App = () => {
   return (
     <ReduxProvider store={store}>
       <div className='App' style={{}}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path='/'
-              element={
-                <>
-                  <Header />
-                  <Main />
-                  <Footer />
-                </>
-              }
-            ></Route>
-            <Route path='/login' element={<Login />}></Route>
-            <Route path='/join' element={<Join />}></Route>
-            {/* <Route
-              path='/product/:productId'
-              element={
-                <>
-                  <Header />
-                  <Product />
-                  <Footer />
-                </>
-              }
-            ></Route> */}
-            <Route
-              path='/post/:postId'
-              element={
-                <>
-                  <Header />
-                  <PostDefail />
-                  <Footer />
-                </>
-              }
-            ></Route>
-            {/* 엘리먼트의 상단에 위치하는 라우트들의 규칙을 모두 확인하고, 일치하는 라우트가 없다면 이 라우트가 화면에 나타나게 됩니다. */}
-            <Route path='*' element={<NotFound />}></Route>
-          </Routes>
-        </BrowserRouter>
+        <Navigation />
       </div>
     </ReduxProvider>
   );

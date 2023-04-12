@@ -1,0 +1,121 @@
+.post_write_wrap {
+    position: relative;
+}
+textarea { resize: none;
+    font-family: 'notosans reg';
+    }
+
+.post_write_container{
+    position: absolute;
+    width: 100%;
+    background-color: black;
+}
+
+.post_write_header{
+
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #d4d4d4;
+    padding-bottom: 20px;
+}
+.post_write_header_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post_write_header_title > p {
+
+    font-size: 18px;
+    font-weight: bold;
+}
+.post_write_submit{
+    position: absolute;
+    right: 20px;
+
+}
+.post_write_body{
+    position: relative;
+}
+
+.post_write_submit_btn{
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #fff;
+    border: 0;
+    color: #94969b;
+    font-family: 'notosans';
+    font-size: 16px;
+}
+
+.post_write_topic {
+    cursor: pointer;
+    border-bottom: 1px solid #d4d4d4;
+    padding: 0px 20px;
+}
+
+.post_write_topic_icon{
+    padding: 20px 0px;
+    align-items: center;
+    display: flex;
+}
+.post_write_topic_icon > p {
+    margin-left: 10px;
+}
+
+.post_write_title{
+    border : 0;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.post_write_title::placeholder{
+    color: #94969b;
+}
+
+.post_write_title_wrap{
+    border-bottom: 1px solid #d4d4d4;
+    padding: 20px 0px;
+    margin : 0px 50px;
+}
+
+.post_write_textarea_wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.post_write_textarea{
+    height: 450px;
+    padding: 20px 0px;
+    width: 90%;
+    border:0;
+    font-family: 'notosans reg';
+    font-size: 16px;
+}
+
+.post_write_textarea::placeholder{
+    color: #94969b;
+}
+
+
+.post_write_topic_menu_wrap{
+    border-bottom: 1px solid #d4d4d4;
+    overflow-y: auto;
+    height: 200px;
+    position: absolute;
+    width: 100%;
+}
+
+.post_write_topic_sub{
+    background-color: #fff;
+    padding:10px 20px;
+    display: flex;
+    justify-content: space-between;
+    
+    border-bottom: 1px solid #f6f7fa;
+}
+
+.post_write_topic_sub > p {
+    font-size: 15px;
+    font-family: 'notosans reg';
+}

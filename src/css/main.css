@@ -1,0 +1,30 @@
+.main_post_sub_wrap > div > div:nth-child(1) {
+    margin-right: 40px;
+    margin-top: 40px;
+}
+
+.main_post_sub_wrap > div > div:nth-child(2) {
+    margin-left: 40px;
+    margin-top: 40px;
+}
+
+/* .testaa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5vmin;
+    background-color: #fff;
+    padding: 7vmin;
+  }
+  
+.testaa1 {
+    padding: 3vmin 6vmin;
+    border: 2px solid olivedrab;
+    background: none;
+    color: olivedrab;
+    font-size: 4vmin;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+  } */

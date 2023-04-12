@@ -15,9 +15,11 @@ import WrapDiv from '../comp/WrapDiv';
 import { COLORS } from '../css/Color';
 import { Comment, Post } from '../type/post';
 import { axiosJwtPostInstance, axiosPostInstance, logout } from '../util/axiosPlugin';
-import { date, getCookie } from '../util/common';
+import { changeEnteredNum, date, getCookie } from '../util/common';
 import PostLike from '../comp/PostLike';
 import { useQuery } from 'react-query';
+import LikeRed from '../comp/img/LikeRed';
+import { motion } from 'framer-motion';
 
 const PostDefail = () => {
   const { postId } = useParams();
@@ -29,9 +31,7 @@ const PostDefail = () => {
 
   const test = async () => {
     const b = await fetchPostHistory();
-    console.log(b);
     const a = getCookie('postId');
-    console.log(a);
   };
 
   const fetchPostHistory = () => axiosPostInstance.post(`post/history/${postId}`);
@@ -61,10 +61,20 @@ const PostDefail = () => {
     return <>{isError}</>;
   }
 
+  const listMotion = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  const itemMotion = {
+    hidden: { opacity: 0, y: 100 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <WrapDiv>
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: 0.73, paddingRight: 50 }}>
+      <motion.div style={{ display: 'flex' }} transition={{ duration: 1 }} variants={listMotion} initial='hidden' animate='visible'>
+        <motion.div style={{ flex: 0.73, paddingRight: 50 }} variants={itemMotion} transition={{ duration: 0.5 }}>
           <div style={{ display: 'flex', alignContent: 'center', alignItems: 'center' }}>
             <b style={{}}>{'토픽  '}</b>
             <RightArrow />
@@ -85,7 +95,7 @@ const PostDefail = () => {
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
               <Eye />
-              <b style={{ color: COLORS.black_350, fontSize: 14, marginLeft: 5 }}>13</b>
+              <b style={{ color: COLORS.black_350, fontSize: 14, marginLeft: 5 }}>{changeEnteredNum(post?.countHistory)}</b>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
               <MessageGray />
@@ -100,7 +110,7 @@ const PostDefail = () => {
           <div style={divid} />
           <div style={{ textAlign: 'left' }}>{post?.content}</div>
           <div style={{ display: 'flex', marginTop: 30 }}>
-            <PostLike id={post?.postId} count={post?.countPostLike} isLike={post?.like} />
+            <PostLike id={post?.postId} count={post?.countPostLike} isLike={post?.like} icon1={<LikeRed width={20} height={20} />} icon2={<LikeBlack />} />
             {/* <a onClick={() => alert(34)} style={{ display: 'flex', cursor: 'pointer' }}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <LikeBlack />
@@ -117,14 +127,14 @@ const PostDefail = () => {
           </div>
           <div style={divid} />
           <CommentWriteView hide={false} length={post?.comments.length} postId={post?.postId} commentId={0} />
-          {post?.comments.map((item: Comment) => {
-            return <CommentView key={item.commentId + '_comment_view_' + item.commentId} writer={post?.tbUser} comment={item} />;
+          {post?.comments?.map((item: Comment) => {
+            return <CommentView key={item.commentId + '_comment_view_' + item.parentId + '_' + Math.random()} writer={post?.tbUser} comment={item} />;
           })}
-        </div>
+        </motion.div>
         <div style={{ flex: 0.27 }}>
           <SearchRank />
         </div>
-      </div>
+      </motion.div>
     </WrapDiv>
   );
 };

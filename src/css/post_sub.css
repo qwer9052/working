@@ -1,0 +1,16 @@
+.post_sub_wrap {
+    flex:0.5
+}
+.post_sub_head{
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #3127a0;
+}
+
+.post_sub_wrap  .more {
+    margin-right: 0px;
+    margin-left: auto;
+    color: #222;
+    font-size: 12px;
+}

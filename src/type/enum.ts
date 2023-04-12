@@ -4,10 +4,19 @@ export enum del {
 }
 
 export enum postType {
-  ETC = 'ETC',
-  FREE = 'FREE',
-  COMPANY = 'COMPANY',
-  FOOT = 'FOOT',
+  ETC = '기타',
+  FREE = '자유',
+  COMPANY = '회사',
+  FOOT = '먹방',
+  REAL_ESTATE = '부동산',
+  STOCK = '주식/투자',
+  DATE = '썸연애',
+  HOBBY = '취미',
+  SHOPPING = '쇼핑',
+  PET = '반려동물',
+  SPORTS = '스포츠',
+  MILITARY = '군대',
+  RECRUITMENT = '채용',
 }
 
 export const POST_TYPE_PRIORITY_NAME_MAP = {

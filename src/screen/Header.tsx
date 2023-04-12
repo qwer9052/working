@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoginButton from '../comp/LoginButton';
 import StyledLink from '../comp/StyledLink';
 import WriteButton from '../comp/WriteButton';
 import { COLORS } from '../css/Color';
-import { getToken, logout } from '../util/axiosPlugin';
+import { getToken, loginCheck, logout } from '../util/axiosPlugin';
 import { useAsync } from 'react-async';
+import PostWrite from './PostWrite';
 
 function Header() {
+  const [openPostWrite, setOpenPostWrite] = useState(false);
+
   useEffect(() => {}, []);
 
   const { data, error, isPending } = useAsync({ promiseFn: getToken });
@@ -39,22 +42,32 @@ function Header() {
       );
     }
   };
+
+  const actionWrite = async () => {
+    await loginCheck();
+    setOpenPostWrite(true);
+  };
+
   return (
-    <header style={{ borderBottom: '1px solid #d4d4d4', position: 'relative', marginBottom: 45 }}>
-      <div style={{ height: 80, width: 1100, margin: 'auto', justifyContent: 'space-between', display: 'flex' }}>
-        <div style={{ alignSelf: 'center' }}>
-          <Link style={{ textDecoration: 'none' }} to='/'>
-            <p style={{ fontSize: 32, fontWeight: 'bold', color: COLORS.point, fontFamily: 'logo' }}>Workingnet</p>
-          </Link>
+    <>
+      <PostWrite visible={openPostWrite} setVisible={setOpenPostWrite} />
+
+      <header style={{ borderBottom: '1px solid #d4d4d4', position: 'relative', marginBottom: 45 }}>
+        <div style={{ height: 80, width: 1100, margin: 'auto', justifyContent: 'space-between', display: 'flex' }}>
+          <div style={{ alignSelf: 'center' }}>
+            <Link style={{ textDecoration: 'none' }} to='/'>
+              <p style={{ fontSize: 32, fontWeight: 'bold', color: COLORS.point, fontFamily: 'logo' }}>Workingnet</p>
+            </Link>
+          </div>
+
+          <WriteButton onClick={actionWrite}>
+            <a style={{ color: '#fff' }}>글쓰기</a>
+          </WriteButton>
+
+          <Token />
         </div>
-
-        <WriteButton onClick={() => alert('test')}>
-          <a style={{ color: '#fff' }}>글쓰기</a>
-        </WriteButton>
-
-        <Token />
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
 

@@ -32,7 +32,7 @@ const CommentView = (props: CommentViewType) => {
   const [hide, setHide] = useState(true);
 
   return (
-    <div className='comment_view_comment_wrap'>
+    <div key={props.comment.commentId + '_comment_id'} className='comment_view_comment_wrap'>
       <div style={{ padding: '20px 30px' }}>
         <span style={{ color: COLORS.point, fontSize: 13, fontFamily: 'notosans reg' }}>{props.comment.tbUser.name}</span>
 

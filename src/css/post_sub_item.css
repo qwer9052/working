@@ -1,0 +1,14 @@
+.post_sub_item_wrap {
+    display: flex;
+    padding:7px 0px;
+    cursor: pointer;
+    justify-content: space-between;
+}
+.post_sub_item_wrap  span{
+    font-size: 14px;
+    font-family: 'notosans reg';
+}
+
+.post_sub_item_eye{
+    margin-right: 0;
+}

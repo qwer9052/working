@@ -9,6 +9,8 @@ type like = {
   id: number;
   count: number;
   isLike: boolean;
+  icon1: any;
+  icon2: any;
 };
 
 const PostLike = (props: like) => {
@@ -31,9 +33,9 @@ const PostLike = (props: like) => {
 
   const icon = () => {
     if (click == null) {
-      return props.isLike ? <LikeRed width={20} height={20} /> : <LikeBlack />;
+      return props.isLike ? props.icon1 : props.icon2;
     } else {
-      return click ? <LikeRed width={20} height={20} /> : <LikeBlack />;
+      return click ? props.icon1 : props.icon2;
     }
   };
 
